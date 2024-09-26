@@ -72,9 +72,9 @@ func calculate(response ValidationResponse) (float32, error) {
 }
 
 func main() {
-	response, err := scanAndValidation()
-	if err != nil {
-		log.Fatal(err)
+	response, responseErr := scanAndValidation()
+	if responseErr != nil {
+		log.Fatal(responseErr)
 	}
 
 	result, resultErr := calculate(response)

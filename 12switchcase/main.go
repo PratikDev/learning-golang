@@ -23,7 +23,7 @@ type ValidationResponse struct {
 
 // scan and validation function
 func scanAndValidation() (ValidationResponse, error) {
-	operators := []string{"+", "-", "*", "/"}
+	OPERATORS := []string{"+", "-", "*", "/"}
 	var (
 		firstNumber, secondNumber float32
 		operator                  string
@@ -39,7 +39,7 @@ func scanAndValidation() (ValidationResponse, error) {
 	fmt.Scan(&operator)
 
 	// checking if operator is invalid
-	if !contains(operators[:], operator) {
+	if !contains(OPERATORS[:], operator) {
 		return ValidationResponse{}, fmt.Errorf("invalid input in operator")
 	}
 
@@ -54,20 +54,21 @@ func scanAndValidation() (ValidationResponse, error) {
 
 // calculate
 func calculate(response ValidationResponse) (float32, error) {
-	if response.Operator == "+" {
+	switch response.Operator {
+	case "+":
 		return response.FirstNumber + response.SecondNumber, nil
-	} else if response.Operator == "-" {
+	case "-":
 		return response.FirstNumber - response.SecondNumber, nil
-	} else if response.Operator == "*" {
+	case "*":
 		return response.FirstNumber * response.SecondNumber, nil
-	} else if response.Operator == "/" {
+	case "/":
 		if response.SecondNumber == 0 {
 			return 0, fmt.Errorf("math error: division by zero")
 		}
 		return response.FirstNumber / response.SecondNumber, nil
+	default:
+		return 0, nil
 	}
-
-	return 0, nil
 }
 
 func main() {

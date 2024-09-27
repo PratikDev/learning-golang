@@ -15,7 +15,7 @@ type person struct {
 	Tags       []string `json:"-"`
 }
 
-func main() {
+func encodeJson() {
 	persons := []person{
 		{
 			Name:       "Pratik Dev",
@@ -50,6 +50,27 @@ func main() {
 	responseBuilder.Write(finalJson)
 
 	fmt.Println(responseBuilder.String())
+}
+
+func decodeJson() {
+	jsonByte := []byte(`{"name":"Pratik Dev","age":22,"gender":"Male","occupation":"Web Developer","hobbies":["reading","writing","debating"]}`)
+
+	if !(json.Valid(jsonByte)) {
+		checkErrNil(fmt.Errorf("invalid json"))
+	}
+
+	var data person
+	json.Unmarshal(jsonByte, &data)
+	fmt.Printf("%+v\n", data)
+
+	var dataWithoutStruct map[string]interface{}
+	json.Unmarshal(jsonByte, &dataWithoutStruct)
+	fmt.Printf("%+v\n", dataWithoutStruct)
+}
+
+func main() {
+	encodeJson()
+	decodeJson()
 }
 
 func checkErrNil(err error) {

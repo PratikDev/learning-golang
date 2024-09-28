@@ -20,7 +20,7 @@ cd "$FOLDER_NAME" || exit
 touch main.go
 
 # Initialize a Go module with the module name
-go mod init "$MODULE_NAME"
+go mod init github.com/pratikdev/learning-golang/"$MODULE_NAME"
 
 echo ""
 echo "Folder '$FOLDER_NAME' created."
